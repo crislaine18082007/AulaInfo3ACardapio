@@ -54,18 +54,43 @@ export default function App() {
         },
     ]);
 
-return(
-    <div>
-        {
-            listaProdutos.map( (objeto) => 
-            <div key={objeto.id}>
-                <p>{objeto.item}</p>
+    const [listaPedidos, setPedidos] = useState ([]);
+    const adicionarProdutoPedido = (produto) =>{
+        setPedidos([...listaPedidos, produto]);
+    }
+    console.table(listaPedidos);
 
+return(
+    <div className="bloco-principal">
+        {
+            listaProdutos.map((produto) => 
+
+            <div key={produto.id}>
+            <img src = {produto.imagem}/>    
+            <p>{produto.item}</p>
+            <button onClick={() => adicionarProdutoPedido(produto)}> Quero! </button>
             </div>    
             
-            
-            )
-        }
+        )
+    }
+
+    <div className="bloco-pedidos">
+        <p>Meus Pedidos</p>
+        {
+            listaPedidos.map((produto) =>
+                <table key = {produto.id}>
+<tr>
+<td>{produto.item}</td>
+<td>{produto.preco}</td>
+<td>
+    <button onClick={() => RemoverPedido(produto)}> Remover </button>
+</td>
+</tr>
+
+                </table>
+ )
+}      
     </div>
-    );
+    </div>
+);
 }
