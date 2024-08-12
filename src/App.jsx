@@ -60,8 +60,25 @@ export default function App() {
     }
     console.table(listaPedidos);
 
+    const removerItem = (id)=> {
+        let listaAux = listaPedidos.filter((pedido, index)=> {
+            if(index !== id){
+
+                return pedido
+             } 
+             else {
+                return null;
+                }
+            }
+        );
+
+        setPedidos(listaAux);
+    }
+    console.table(listaPedidos);
+
 return(
     <div className="bloco-principal">
+        <div className="bloco-produtos">
         {
             listaProdutos.map((produto) => 
 
@@ -73,17 +90,18 @@ return(
             
         )
     }
+</div>
 
     <div className="bloco-pedidos">
         <p>Meus Pedidos</p>
         {
-            listaPedidos.map((produto) =>
+            listaPedidos.map((produto, index) =>
                 <table key = {produto.id}>
 <tr>
 <td>{produto.item}</td>
 <td>{produto.preco}</td>
 <td>
-    <button onClick={() => RemoverPedido(produto)}> Remover </button>
+    <button onClick={() => removerItem(index)}> Remover </button>
 </td>
 </tr>
 
